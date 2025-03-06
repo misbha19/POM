@@ -20,10 +20,11 @@ public class HomeTest extends Base{
         clean();
     }
 
-    @Test
+    @Test //use (enabled = false) to prevent this test from running
     void  checkLogo(){
         boolean test=home.isLogoVisible();
-        Assert.assertTrue(test);
+        //Assert.assertFalse(test);
+         Assert.assertTrue(test);
     }
 
     @Test

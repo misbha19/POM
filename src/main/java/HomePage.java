@@ -7,35 +7,27 @@ import java.time.Duration;
 
 public class HomePage extends Base{
 
-@FindBy(css="[data-airgap-id='5']") WebElement logo;
+@FindBy(css=".MuiBox-root.mui-saptuz a img") WebElement logo;
 @FindBy (xpath = "//input[@aria-label='Search Costco']") WebElement search;
 @FindBy (css = ".MuiBox-root.mui-gg4vpm h1") WebElement searchResult;
-@FindBy (xpath = "//button[contains(text(), 'No Thanks')]") WebElement noThanksButton;
+@FindBy(css = ".mui-1pgflb3") WebElement noThanks;
 
 
 boolean isLogoVisible() {
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
-    try {
-        // Thread.sleep(5000);
-         WebElement noThanks = wait.until(ExpectedConditions.elementToBeClickable(noThanksButton));
-         noThanks.click();
-     } catch (Exception e) {
-        System.out.println("Proceeding, as no such button found.");
-        // throw new RuntimeException(e);
-     }
-    return logo.isDisplayed();
+waitForElementVisibility(5000, logo);
+return logo.isDisplayed();
 }
 
 
 void search(String text){
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
-    try {
-        WebElement noThanks = wait.until(ExpectedConditions.elementToBeClickable(noThanksButton));
-        noThanks.click();
-    } catch (Exception e) {
-        System.out.println("Proceeding, as no such button found.");
-    }
+    waitForElementVisibility(5000, search);
+    clickNoThanks();
    search.sendKeys(text, Keys.ENTER);
+}
+
+void clickNoThanks(){
+    waitForElementVisibility(10000, noThanks);
+    noThanks.click();
 }
 
 
